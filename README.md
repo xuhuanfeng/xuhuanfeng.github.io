@@ -18,6 +18,15 @@
 - 启动本地服务：`hexo s`
 - 部署：`hexo d`
 
+## 新机器操作
+
+1. 安装Node、Git环境
+2. 执行：`git clone XXX`
+3. 执行：`git submodule init`
+4. 执行：`git submodule update`
+5. 执行：`yarn`
+6. 执行：`hexo s`看能否正常使用
+
 
 
 
