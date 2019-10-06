@@ -5,13 +5,16 @@ tags: Docker
 categories: 容器
 ---
 
+这篇文章主要是学习Docker过程的一个记录
+
+Docker是新的容器化技术，相对于虚拟机技术，更加轻巧，更加易于移植，越来越受广大开发者的喜好。
+
+<!--more-->
+
 # Docker介绍及基本使用
 
 ## Docker介绍
 
-Docker是新的容器化技术，相对于虚拟机技术，更加轻巧，更加易于移植。
-
-<!--more-->
 
 Docker特征
 
