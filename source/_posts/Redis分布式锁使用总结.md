@@ -201,11 +201,11 @@ obtainLockScript = new DefaultRedisScript<>(OBTAIN_LOCK_SCRIPT, Boolean.class);
 ```java
 private static final String OBTAIN_LOCK_SCRIPT =
 			"local lockClientId = redis.call('GET', KEYS[1])\n" +
-					"if lockClientId == ARGV[1] then\n" +
+				"if lockClientId == ARGV[1] then\n" +
 					"  redis.call('PEXPIRE', KEYS[1], ARGV[2])\n" +
 					"  return true\n" +
 					"elseif not lockClientId then\n" +
-					"  redis.call('SET', KEYS[1], ARGV[1], 'PX', ARGV[2])\n" +
+    				"  redis.call('SET', KEYS[1], ARGV[1], 'PX', ARGV[2])\n" +
 					"  return true\n" +
 					"end\n" +
 					"return false";
@@ -226,11 +226,11 @@ private static final String OBTAIN_LOCK_SCRIPT =
 
 ```java
 public static boolean isUnlinkAvailable(RedisOperations<?, ?> redisOperations) {
-		return unlinkAvailable.computeIfAbsent(
-            redisOperations, key -> {
-				Properties info = redisOperations.execute(
+  return unlinkAvailable.computeIfAbsent(
+		redisOperations, key -> {
+			Properties info = redisOperations.execute(
 					(RedisCallback<Properties>) connection -> 
-                    connection.serverCommands().info(SECTION));
+					connection.serverCommands().info(SECTION));
 			if (info != null) {
 				String version = info.getProperty(VERSION_PROPERTY);
 				if (StringUtils.hasText(version)) {
