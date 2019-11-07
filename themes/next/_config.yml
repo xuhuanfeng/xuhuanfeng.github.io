@@ -205,11 +205,11 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: Links
+links_title: 我的好友们
 links_layout: block
 #links_layout: inline
 links:
-  #Title: http://example.com
+  DoneSpeak: https://donespeak.gitlab.io/
 
 # Sidebar Avatar
 avatar:
