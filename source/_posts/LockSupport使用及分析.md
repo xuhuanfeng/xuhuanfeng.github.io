@@ -4,7 +4,7 @@ date: 2019-10-17 19:54:30
 tags: 
   - Java
   - LockSupport
-  - concurrent
+  - Concurrent
 categories:
   - Java
   - Concurrent
