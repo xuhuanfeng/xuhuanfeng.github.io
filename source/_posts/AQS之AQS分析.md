@@ -9,8 +9,6 @@ categories:
   - Concurrent
 ---
 
-# AQS使用及分析之AQS分析
-
 接下来的这篇文章将详细分析AQS，AQS全称是AbstractQueuedSynchronizer，翻译过来是抽象队列同步器，也即AQS是一个基于队列实现的抽象同步器
 
 AQS封装了获取锁，释放锁等操作，同时暴露一些try开头的方法交给子类来实现，通过继承AQS可以非常方便地实现一个线程安全的并发同步器，在`java.util.concurrent`包中的大多数高层次同步器，如`CountdownLatch`、`ReentrantLock`等都是通过AQS实现的
@@ -33,6 +31,8 @@ AQS封装了获取锁，释放锁等操作，同时暴露一些try开头的方�
 > 非常感谢大神无私地分享
 
 <!--more-->
+
+# AQS之AQS分析
 
 ## 核心概念
 
