@@ -136,11 +136,15 @@ Node中通过类型的Node的nextWaiter将其串联起来，其值有两种
 
 当节点处于等待获取锁时，等待队列如下图所示
 
-![等待队列.png](http://ww1.sinaimg.cn/large/b162e9f4gy1g8xfdqkx98j20zz0a1405.jpg)
+![等待队列.png](https://raw.githubusercontent.com/xuhuanfeng/images/master/blog-images20201206092736.png)
+
+
 
 当节点处于等待某个条件时，条件队列如下所示
 
-![条件队列.png](http://ww1.sinaimg.cn/large/b162e9f4gy1g8xf8mxafmj21050abjt2.jpg)
+![条件队列.png](https://raw.githubusercontent.com/xuhuanfeng/images/master/blog-images20201206092815.png)
+
+
 
 ### AQS结构
 
@@ -152,7 +156,7 @@ exclusiveOwnerThread代表的是当前占据独占锁的线程，该属性继承
 
 AQS的完整结构如下
 
-![AQS.png](http://ww1.sinaimg.cn/large/b162e9f4gy1g8xivaory3j20vv0j441s.jpg)
+![AQS.png](https://raw.githubusercontent.com/xuhuanfeng/images/master/blog-images20201206092842.png)
 
 ### 获取锁
 

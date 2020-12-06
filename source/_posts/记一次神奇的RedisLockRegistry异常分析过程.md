@@ -9,6 +9,10 @@ categories:
   - Java
 ---
 
+一次神奇的RedisLockRegistry异常，程序运行过程中一直抛出`java.nio.BufferOverflowException`，百思不得其解，最后终于通过跟踪源代码，定位到问题，最终发现是低版本Spring-Redis的一个Bug
+
+<!--more-->
+
 # 记一次神奇的RedisLockRegistry异常分析过程
 
 ## 问题
