@@ -11,7 +11,7 @@ tags:
   - TreeMap
 categories:
   - Java
-  - Collection
+  - Collections
   - Map
 ---
 
