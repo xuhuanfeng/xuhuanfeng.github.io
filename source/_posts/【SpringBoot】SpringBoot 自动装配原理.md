@@ -6,8 +6,8 @@ tags:
   - Spring Starter
   - 自动装配
 categories:
-  - SpringBoot
   - Java
+  - SpringBoot
 
 ---
 
