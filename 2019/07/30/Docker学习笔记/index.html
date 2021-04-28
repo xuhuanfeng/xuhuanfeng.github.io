@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Docker学习笔记 - 凌风的小窝</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="凌风的小窝"><meta name="msapplication-TileImage" content="/images/favicon.ico"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="凌风的小窝"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="这篇文章主要是学习Docker过程的一个记录 Docker是新的容器化技术，相对于虚拟机技术，更加轻巧，更加易于移植，越来越受广大开发者的喜好。"><meta property="og:type" content="blog"><meta property="og:title" content="Docker学习笔记"><meta property="og:url" content="https://www.xuhuanfeng.cn/2019/07/30/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="凌风的小窝"><meta property="og:description" content="这篇文章主要是学习Docker过程的一个记录 Docker是新的容器化技术，相对于虚拟机技术，更加轻巧，更加易于移植，越来越受广大开发者的喜好。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.xuhuanfeng.cn/img/og_image.png"><meta property="article:published_time" content="2019-07-30T07:44:00.000Z"><meta property="article:modified_time" content="2021-04-28T05:43:22.288Z"><meta property="article:author" content="大黄蜂"><meta property="article:tag" content="Docker"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.xuhuanfeng.cn/2019/07/30/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"},"headline":"凌风的小窝","image":["https://www.xuhuanfeng.cn/img/og_image.png"],"datePublished":"2019-07-30T07:44:00.000Z","dateModified":"2021-04-28T05:43:22.288Z","author":{"@type":"Person","name":"大黄蜂"},"description":"这篇文章主要是学习Docker过程的一个记录 Docker是新的容器化技术，相对于虚拟机技术，更加轻巧，更加易于移植，越来越受广大开发者的喜好。"}</script><link rel="canonical" href="https://www.xuhuanfeng.cn/2019/07/30/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/images/favicon.ico"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">凌风的小窝</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/xuhuanfeng"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-07-30T07:44:00.000Z" title="2019/7/30 下午3:44:00">2019-07-30</time>发表</span><span class="level-item"><time dateTime="2021-04-28T05:43:22.288Z" title="2021/4/28 下午1:43:22">2021-04-28</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a></span><span class="level-item">16 分钟读完 (大约2436个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Docker学习笔记</h1><div class="content"><p>这篇文章主要是学习Docker过程的一个记录</p>
+<p>Docker是新的容器化技术，相对于虚拟机技术，更加轻巧，更加易于移植，越来越受广大开发者的喜好。</p>
+<span id="more"></span>
+
+<h1 id="Docker介绍及基本使用"><a href="#Docker介绍及基本使用" class="headerlink" title="Docker介绍及基本使用"></a>Docker介绍及基本使用</h1><h2 id="Docker介绍"><a href="#Docker介绍" class="headerlink" title="Docker介绍"></a>Docker介绍</h2><p>Docker特征</p>
+<ul>
+<li>速度快</li>
+<li>隔离机制</li>
+<li>低消耗</li>
+</ul>
+<p>Docker核心组件</p>
+<ul>
+<li>Docker客户端和服务器<ul>
+<li>Docker是一个客户端-服务器(C/S)架构的应用程序</li>
+<li>Docker提供了一个命令行工具以及完整的RESTful API</li>
+<li>可以在同一个宿主机上运行Docker守护进程和客户端，也可以从本地Docker客户端连接到另一台宿主机上的Docker守护进程</li>
+</ul>
+</li>
+<li>Docker镜像<ul>
+<li>镜像是构建Docker世界的基石</li>
+<li>用于基于镜像来运行自己的容器</li>
+<li>镜像是基于联合文件系统的一种层式结构，由一系列指令一步步构建出来</li>
+<li>镜像体积很小，易于分享、存储和更新</li>
+</ul>
+</li>
+<li>Registry(仓库)<ul>
+<li>Docker用Registry来保存用户构建的镜像</li>
+<li>Registry分为公共(如Docker Hub)和私有(自建仓库等)</li>
+</ul>
+</li>
+<li>Docker容器<ul>
+<li>容器是基于镜像启动的</li>
+<li>一个容器中可以运行一个或多个进程</li>
+<li>每个容器包含一个软件镜像</li>
+<li>可以简单地理解为容器就是运行起来的镜像</li>
+</ul>
+</li>
+</ul>
+<p>Docker应用场景</p>
+<ul>
+<li>加速本地开发和构建流程(容器可以直接在不同的环境中运行)</li>
+<li>能够让独立服务或应用程序在不同的环境中，得到相同的运行结果</li>
+<li>使用Docker创建隔离的环境来进行测试</li>
+<li>构建一个多用户的PaaS基础设施</li>
+<li>为开发、测试提供一个轻量级的独立沙盒环境</li>
+<li>提供SaaS应用程序</li>
+<li>高性能、超大规模的宿主机部署</li>
+</ul>
+<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><p>这里演示使用的os是centos7 64位，需要使用root运行</p>
+<p>Docker必备环境</p>
+<ul>
+<li>运行64位CPU架构的计算机</li>
+<li>运行Linux3.8及以上版本内核</li>
+</ul>
+<p>上述内容可以通过<code>uname -r</code>命令进行查看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.10.0-862.14.4.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这里的内核版本是3.10，机器是64为，满足安装Docker的必备环境。</p>
+<p>安装Docker，命令为<code>yum install docker</code></p>
+<p>依赖分析后的内容如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===============================================================================================</span><br><span class="line"> Package                             Arch   Version                              Repository</span><br><span class="line">                                                                                          Size</span><br><span class="line">===============================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> docker                              x86_64 2:1.13.1-75.git8633870.el7.centos    extras   16 M</span><br><span class="line">Installing for dependencies:</span><br><span class="line"> PyYAML                              x86_64 3.10-11.el7                          base    153 k</span><br><span class="line"> atomic-registries                   x86_64 1:1.22.1-25.git5a342e3.el7.centos    extras   35 k</span><br><span class="line"> audit-libs-python                   x86_64 2.8.1-3.el7_5.1                      updates  75 k</span><br><span class="line"> checkpolicy                         x86_64 2.5-6.el7                            base    294 k</span><br><span class="line"> container-selinux                   noarch 2:2.68-1.el7                         extras   36 k</span><br><span class="line"> container-storage-setup             noarch 0.11.0-2.git5eaf76c.el7              extras   35 k</span><br><span class="line"> device-mapper-event                 x86_64 7:1.02.146-4.el7                     base    185 k</span><br><span class="line"> device-mapper-event-libs            x86_64 7:1.02.146-4.el7                     base    184 k</span><br><span class="line"> device-mapper-persistent-data       x86_64 0.7.3-3.el7                          base    405 k</span><br><span class="line"> docker-client                       x86_64 2:1.13.1-75.git8633870.el7.centos    extras  3.8 M</span><br><span class="line"> docker-common                       x86_64 2:1.13.1-75.git8633870.el7.centos    extras   93 k</span><br><span class="line"> libcgroup                           x86_64 0.41-15.el7                          base     65 k</span><br><span class="line"> libsemanage-python                  x86_64 2.5-11.el7                           base    112 k</span><br><span class="line"> libyaml                             x86_64 0.1.4-11.el7_0                       base     55 k</span><br><span class="line"> lvm2                                x86_64 7:2.02.177-4.el7                     base    1.3 M</span><br><span class="line"> lvm2-libs                           x86_64 7:2.02.177-4.el7                     base    1.0 M</span><br><span class="line"> oci-register-machine                x86_64 1:0-6.git2b44233.el7                 extras  1.1 M</span><br><span class="line"> oci-systemd-hook                    x86_64 1:0.1.17-2.git83283a0.el7            extras   33 k</span><br><span class="line"> oci-umount                          x86_64 2:2.3.3-3.gite3c9055.el7             extras   32 k</span><br><span class="line"> policycoreutils-python              x86_64 2.5-22.el7                           base    454 k</span><br><span class="line"> python-IPy                          noarch 0.75-6.el7                           base     32 k</span><br><span class="line"> python2-pytoml                      noarch 0.1.18-1.el7                         epel     20 k</span><br><span class="line"> setools-libs                        x86_64 3.3.8-2.el7                          base    619 k</span><br><span class="line"> skopeo-containers                   x86_64 1:0.1.31-1.dev.gitae64ff7.el7.centos extras   17 k</span><br><span class="line"> subscription-manager-rhsm-certificates</span><br><span class="line">                                     x86_64 1.20.11-1.el7.centos                 base    195 k</span><br><span class="line"> yajl                                x86_64 2.0.4-4.el7                          base     39 k</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===============================================================================================Install  1 Package (+26 Dependent packages)</span><br><span class="line"></span><br><span class="line">Total download size: 27 M</span><br><span class="line">Installed size: 87 M</span><br><span class="line">Is this ok [y/d/N]:</span><br></pre></td></tr></table></figure>
+
+<p>直接输入<code>y</code>即可</p>
+<p>检查是否安装成功：<code>docker --version</code>，输入内容为 <code>Docker version 1.13.1, build 8633870/1.13.1</code></p>
+<p>启动docker服务：<code>systemctl start docker</code></p>
+<p>设置开机自启：<code>systemctl enable docker</code></p>
+<p>检查docker是否启动成功：<code>docker info</code>，输入内容如下，则表示启动成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Containers: 0</span><br><span class="line"> Running: 0</span><br><span class="line"> Paused: 0</span><br><span class="line"> Stopped: 0</span><br><span class="line">Images: 0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>关闭Docker：<code>systemctl stop docker</code></p>
+<p>重启Docker：<code>systemctl restart docker</code></p>
+<h2 id="Docker使用"><a href="#Docker使用" class="headerlink" title="Docker使用"></a>Docker使用</h2><h3 id="容器管理"><a href="#容器管理" class="headerlink" title="容器管理"></a>容器管理</h3><ul>
+<li><p>部署容器(容器只有先部署才能启动跟使用，部署即从镜像到容器的过程)</p>
+<ul>
+<li>命令：<code>docker run --name INSTANCE_NAME -d DOCKER_IMAGE_NAME[:TAG]</code></li>
+<li>演示案例<ul>
+<li>命令：<code>docker run --name dkr_tomcat [-d] [-p LOCAL_PORT:CONTAINER:PORT] tomcat</code>，没有指定tag则为最新<ul>
+<li><code>-d</code> 表示以守护进程的形式启动(通常都是需要的)</li>
+<li><code>-p</code> 指定本地以及容器的端口，也可以直接指定容器的端口</li>
+</ul>
+</li>
+<li>如果本地没有指定的镜像，则会先从docker hub中下载，如下所示  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Unable to find image &#x27;tomcat:latest&#x27; locally</span><br><span class="line">Trying to pull repository docker.io/library/tomcat ...</span><br><span class="line">latest: Pulling from docker.io/library/tomcat</span><br><span class="line">...</span><br><span class="line">Status: Downloaded newer image for docker.io/tomcat:latest</span><br><span class="line">36322b0ba8389b058aa3bcb82442244931945ac2d91186615a0a4ed124053655</span><br></pre></td></tr></table></figure></li>
+<li>部署成功之后，会输出一段ID，如这里的<code>36322b0ba8389b058aa3bcb82442244931945ac2d91186615a0a4ed124053655</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查看运行的容器</p>
+<ul>
+<li>命令：<code>docker ps</code>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES</span><br><span class="line">36322b0ba838        tomcat              &quot;catalina.sh run&quot;   3 minutes ago       Up 3 minutes        8080/tcp            dkr_tomcat</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>docker ps -a</code>可以查看所有的容器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>停止容器</p>
+<ul>
+<li>命令：<code>docker stop ID/NAME</code></li>
+</ul>
+</li>
+<li><p>启动容器</p>
+<ul>
+<li>命令：<code>docker start ID/NAME</code>，该命令是运行一个已经停止的容器</li>
+</ul>
+</li>
+<li><p>重启容器</p>
+<ul>
+<li>命令：<code>docker restart ID/NAME</code></li>
+</ul>
+</li>
+<li><p>查看容器日志</p>
+<ul>
+<li>命令：<code>docker logs ID/NAME</code></li>
+<li>可以使用<code>-f</code>选项来启动日志监控(直接在屏幕打印日志，没有则阻塞)，选项意义同<code>tail</code>命令，<code>ctrl-c</code>退出</li>
+</ul>
+</li>
+<li><p>查看容器内进程</p>
+<ul>
+<li>命令：<code>docker top ID/NAME</code></li>
+</ul>
+</li>
+<li><p>在容器内部运行进程</p>
+<ul>
+<li>命令：<code>docker exec [OPTION] ID/NAME COMMAND</code><br> <code>-d</code>表示在后台执行该命令<ul>
+<li><code>-i</code> 表示进入交互模式</li>
+<li><code>-t</code> 表示创建模拟tty</li>
+</ul>
+</li>
+<li>案例：<ul>
+<li>命令<code>docker exec -it dkr_tomcat /bin/bash</code></li>
+<li>表示指定/bin/bash命令并且进入交互模式，此时可以在容器中执行一些命令，如<code>pwd</code>，<code>ls</code>等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查看更多容器信息</p>
+<ul>
+<li>命令：<code>docker inspect ID/NAME</code></li>
+</ul>
+</li>
+<li><p>删除容器</p>
+<ul>
+<li>命令：<code>docker rm ID/NAME</code></li>
+<li>运行中的容器需要先停止才能删除</li>
+</ul>
+</li>
+</ul>
+<h3 id="镜像管理"><a href="#镜像管理" class="headerlink" title="镜像管理"></a>镜像管理</h3><p>Docker镜像是由文件系统叠加而成，最底层是一个引导文件系统bootfs，当容器启动后，会被移到内存中，而引导文件系统则会被卸载</p>
+<p>Docker镜像第二层是rootfs，位于引导文件系统之上，可以是一种或多种操作系统。</p>
+<p>在Docker中，一个镜像可以放到另一个镜像的顶部，位于下面的镜像称为父镜像，最底部的镜像称为基础镜像，当从一个镜像中启动容器之后，Docker会在该镜像的最顶层加载一个读写文件系统</p>
+<ul>
+<li><p>查看镜像</p>
+<ul>
+<li>命令：<code>docker images</code></li>
+<li>本地镜像都保存在<code>/var/lib/docker</code>目录下(在具体的存储驱动目录下)</li>
+<li>容器则存储在<code>/var/lib/docker/containers</code>目录下</li>
+</ul>
+</li>
+<li><p>拉取镜像</p>
+<ul>
+<li>命令：<code>docker pull IMAGE_NAME[:TAG]</code>，不指定TAG则会拉取仓库内全部镜像</li>
+</ul>
+</li>
+<li><p>查找镜像</p>
+<ul>
+<li>命令：<code>docker search IMAGE_NAME</code></li>
+</ul>
+</li>
+<li><p>删除镜像</p>
+<ul>
+<li>命令：<code>docker rm IAMGE_NAME</code></li>
+</ul>
+</li>
+<li><p>构建镜像，一般通过Dockerfile以及<code>docker build</code>命令来构建镜像</p>
+<ul>
+<li><p>Dockerfile由一系列指令和参数组成，每条指令必须大写，后面必须跟一个参数，如<code>FROM </code></p>
+</li>
+<li><p>每条指令都会创建一个新的镜像层并对镜像进行提交</p>
+</li>
+<li><p><code>#</code>开头为注释内容</p>
+</li>
+<li><p>Dockerfile的第一条指令必须为<code>FROM</code>，后续指令都将基于该镜像进行，该镜像也称为基础镜像</p>
+</li>
+<li><p><code>RUN</code>指令用于在当前镜像中运行指定的命令，默认使用shell来执行，可以通过<code>[&#39;cmd&#39;, &#39;arg&#39;, &#39;...&#39;]</code>来避免</p>
+</li>
+<li><p><code>EXPOSE</code>指令用于指定容器使用的端口</p>
+</li>
+<li><p>案例</p>
+<ul>
+<li><p>新建文件夹<code>static_web</code></p>
+</li>
+<li><p>编辑Dockerfile </p>
+<blockquote>
+<p>Dockerfile</p>
+</blockquote>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Version 0.0.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 命令大小</span></span><br><span class="line">FROM nginx:latest</span><br><span class="line">RUN echo &quot;Hi I am Xavier&quot; &gt;&gt; /usr/share/nginx/html/index.html</span><br><span class="line">EXPOSE 80</span><br></pre></td></tr></table></figure></li>
+<li><p>然后执行命令：<code>docker build -t=&quot;xavier/static_web&quot; .</code></p>
+<ul>
+<li><code>-t</code>用于指定仓库和名称</li>
+<li>注意后面的<code>.</code>，指定当前目录(Dockerfile所在目录)，如果是在外面，需要注意目录的路径。</li>
+</ul>
+</li>
+<li><p>输出内容</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Sending build context to Docker daemon 2.048 kB</span><br><span class="line">Step 1/3 : FROM nginx:latest</span><br><span class="line"><span class="meta">---&gt;</span><span class="bash"> 62f816a209e6</span></span><br><span class="line">Step 2/3 : RUN echo &quot;Hi I am Xavier&quot; &gt;&gt; /usr/share/nginx/html/index.html</span><br><span class="line"><span class="meta">---&gt;</span><span class="bash"> Running <span class="keyword">in</span> 755840b827eb</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---&gt;</span><span class="bash"> c177cbb50afe</span></span><br><span class="line">Removing intermediate container 755840b827eb</span><br><span class="line">Step 3/3 : EXPOSE 80</span><br><span class="line"><span class="meta">---&gt;</span><span class="bash"> Running <span class="keyword">in</span> 200168bc6cdf</span></span><br><span class="line"><span class="meta">---&gt;</span><span class="bash"> 89dbc87994b6</span></span><br><span class="line">Removing intermediate container 200168bc6cdf</span><br><span class="line">Successfully built 89dbc87994b6</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Dockerfile指令"><a href="#Dockerfile指令" class="headerlink" title="Dockerfile指令"></a>Dockerfile指令</h3><ul>
+<li>ADD，将构建目录下指定文件添加到镜像中， <code>ADD a.file /usr/local/share/a.file，</code>如果是压缩文件，会自动解压</li>
+<li>COPY， 仅仅复制，不会自动提取或解压</li>
+</ul>
+<h2 id="Docker容器互连"><a href="#Docker容器互连" class="headerlink" title="Docker容器互连"></a>Docker容器互连</h2><p>默认情况下容器是无法被外界访问的，可以使用暴露端口的方式，但是该方式不推荐，更合适的方式是通过绑定机制来实现容器之间的互连，比如一个tomcat容器以及一个redis容器，可以将tomcat容器与redis容器进行绑定，绑定之后只有tomcat容器能访问到redis容器，其他的容器无法访问，当然，外界环境同样无法访问啦。</p>
+<p>绑定的方式，只需要在部署容器的时候，指定一下所要绑定的容器即可，<code>docker run --link TARGET_CONTAINER:ALIAS_NAME IMAGE</code>，如<code>docker run --link redis:redis-db tomcat</code>，然后可以在tomcat容器中的<code>/etc/hosts</code>文件看到，直接绑定了<code>172.17.0.3  redis-db d78523d89091 redis</code>，可以通过在tomcat容器中执行<code>ping redis-db</code>检测两个容器之间的通信情况。</p>
+<h2 id="卷挂载"><a href="#卷挂载" class="headerlink" title="卷挂载"></a>卷挂载</h2><p>由于Docker容器重启之后，容器中的数据会丢失，为了保存数据，Docker中提供了卷的概念，可以通过卷在外部文件和容器文件进行映射，从而达到共享数据或者持久化数据的目的。</p>
+<p>在构建容器时，可以通过<code>-v SOURCE_DIR:TARGET_DIR</code>进行挂载。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Docker学习笔记</p><p><a href="https://www.xuhuanfeng.cn/2019/07/30/Docker学习笔记/">https://www.xuhuanfeng.cn/2019/07/30/Docker学习笔记/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>大黄蜂</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-07-30</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2021-04-28</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Docker/">Docker</a></div><div class="sharethis-inline-share-buttons"></div><script src="http://www.xuhuanfeng.cn/" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2019/10/06/AtomicXXX%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%88%86%E6%9E%90/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">AtomicXXX使用及分析</span></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/images/me.jpg" alt="大黄蜂"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">大黄蜂</p><p class="is-size-6 is-block">曾经沧海难为水，除却巫山不是云</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>广东，深圳</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">12</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">33</p></a></div></div></nav></div></div><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-04-28T07:00:18.000Z">2021-04-28</time></p><p class="title"><a href="/2021/04/28/%E9%A9%BE%E7%85%A7%E8%80%83%E5%8F%96%E6%8C%87%E5%8D%97/">驾照考取指南</a></p><p class="categories"><a href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a> / <a href="/categories/%E6%9D%82%E8%B0%88/%E7%94%9F%E6%B4%BB/">生活</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-12-28T08:27:12.000Z">2020-12-28</time></p><p class="title"><a href="/2020/12/28/Elasticsearch-Bulk-API%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Elasticsearch Bulk API学习笔记</a></p><p class="categories"><a href="/categories/Elasticsearch/">Elasticsearch</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-12-17T02:15:30.000Z">2020-12-17</time></p><p class="title"><a href="/2020/12/17/%E8%B7%B3%E8%B7%83%E8%A1%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">跳跃表学习笔记</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Collections/">Collections</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-12-11T02:44:44.000Z">2020-12-11</time></p><p class="title"><a href="/2020/12/11/Java%E5%AE%B9%E5%99%A8%E4%B9%8BMap-JDK1-6/">Java容器之Map(JDK1.6)</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Collections/">Collections</a> / <a href="/categories/Java/Collections/Map/">Map</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-12-06T01:24:35.000Z">2020-12-06</time></p><p class="title"><a href="/2020/12/06/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">红黑树学习笔记</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Collections/">Collections</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/04/"><span class="level-start"><span class="level-item">四月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/12/"><span class="level-start"><span class="level-item">十二月 2020</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/03/"><span class="level-start"><span class="level-item">三月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/12/"><span class="level-start"><span class="level-item">十二月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/11/"><span class="level-start"><span class="level-item">十一月 2019</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/10/"><span class="level-start"><span class="level-item">十月 2019</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2019/07/"><span class="level-start"><span class="level-item">七月 2019</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://donespeak.gitlab.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">DoneSpeak</span></span><span class="level-right"><span class="level-item tag">donespeak.gitlab.io</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Elasticsearch/"><span class="level-start"><span class="level-item">Elasticsearch</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Frontend/"><span class="level-start"><span class="level-item">Frontend</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/"><span class="level-start"><span class="level-item">Java</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/Java/Collections/"><span class="level-start"><span class="level-item">Collections</span></span><span class="level-end"><span class="level-item tag">3</span></span></a><ul><li><a class="level is-mobile" href="/categories/Java/Collections/Map/"><span class="level-start"><span class="level-item">Map</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Java/Concurrent/"><span class="level-start"><span class="level-item">Concurrent</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/SpringBoot/"><span class="level-start"><span class="level-item">SpringBoot</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Redis/"><span class="level-start"><span class="level-item">Redis</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"><span class="level-start"><span class="level-item">分布式</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E5%AE%B9%E5%99%A8/"><span class="level-start"><span class="level-item">容器</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%9D%82%E8%B0%88/"><span class="level-start"><span class="level-item">杂谈</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E6%9D%82%E8%B0%88/%E7%94%9F%E6%B4%BB/"><span class="level-start"><span class="level-item">生活</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/AQS/"><span class="tag">AQS</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Atomic/"><span class="tag">Atomic</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Bulk/"><span class="tag">Bulk</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CAS/"><span class="tag">CAS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Collection/"><span class="tag">Collection</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Concurrent/"><span class="tag">Concurrent</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ConcurrentHashMap/"><span class="tag">ConcurrentHashMap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CountdownLatch/"><span class="tag">CountdownLatch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CyclicBarrier/"><span class="tag">CyclicBarrier</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Elasticsearch/"><span class="tag">Elasticsearch</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Frontend/"><span class="tag">Frontend</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HashMap/"><span class="tag">HashMap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Java/"><span class="tag">Java</span><span class="tag">9</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LinkedHashMap/"><span class="tag">LinkedHashMap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LockSupport/"><span class="tag">LockSupport</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Map/"><span class="tag">Map</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Paxos/"><span class="tag">Paxos</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ReentrantLock/"><span class="tag">ReentrantLock</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SPI/"><span class="tag">SPI</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Semaphore/"><span class="tag">Semaphore</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Spring-Starter/"><span class="tag">Spring Starter</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SpringBoot/"><span class="tag">SpringBoot</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TimeUnit/"><span class="tag">TimeUnit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TreeMap/"><span class="tag">TreeMap</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/axios/"><span class="tag">axios</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/"><span class="tag">分布式一致性</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"><span class="tag">分布式锁</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/"><span class="tag">红黑树</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/"><span class="tag">自动装配</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%B7%B3%E8%B7%83%E8%A1%A8/"><span class="tag">跳跃表</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A9%BE%E7%85%A7/"><span class="tag">驾照</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">凌风的小窝</a><p class="is-size-7"><span>&copy; 2021 大黄蜂</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
